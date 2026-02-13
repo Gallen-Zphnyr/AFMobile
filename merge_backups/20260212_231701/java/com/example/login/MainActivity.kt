@@ -1,5 +1,6 @@
 package com.example.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -46,21 +47,26 @@ class MainActivity : AppCompatActivity() {
         val regAddress = findViewById<EditText>(R.id.regAddress)
         val regPassword = findViewById<EditText>(R.id.regPassword)
         val regRePassword = findViewById<EditText>(R.id.regRePassword)
+        
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
 
         // Login Action
         btnLogin.setOnClickListener {
             val email = emailInput.text.toString().trim()
             val password = passwordInput.text.toString().trim()
             
-            if (email == "example@email.com" && password == "12345678") {
+            val savedEmail = sharedPreferences.getString("email", null)
+            val savedPassword = sharedPreferences.getString("password", null)
+            val savedAddress = sharedPreferences.getString("address", "Lipa, Batangas")
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please enter both email and password", Toast.LENGTH_SHORT).show()
+            } else if (email == savedEmail && password == savedPassword) {
                 Toast.makeText(this, "Welcome back!", Toast.LENGTH_SHORT).show()
-                // Navigate to Profile Activity with a default address for demo
                 val intent = Intent(this, ProfileActivity::class.java)
-                intent.putExtra("USER_ADDRESS", "Lipa, Batangas")
+                intent.putExtra("USER_ADDRESS", savedAddress)
                 startActivity(intent)
                 finish()
-            } else if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please enter both email and password", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, "Invalid credentials", Toast.LENGTH_SHORT).show()
             }
@@ -102,13 +108,15 @@ class MainActivity : AppCompatActivity() {
             } else if (password != rePassword) {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Account created for $username", Toast.LENGTH_SHORT).show()
+                val editor = sharedPreferences.edit()
+                editor.putString("username", username)
+                editor.putString("email", email)
+                editor.putString("address", address)
+                editor.putString("password", password)
+                editor.apply()
                 
-                // Navigate to Profile Activity and pass the address
-                val intent = Intent(this, ProfileActivity::class.java)
-                intent.putExtra("USER_ADDRESS", address)
-                startActivity(intent)
-                finish()
+                Toast.makeText(this, "Account created for $username", Toast.LENGTH_SHORT).show()
+                hideSignUpOverlay()
             }
         }
     }

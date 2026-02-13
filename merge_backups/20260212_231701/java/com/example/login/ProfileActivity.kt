@@ -1,5 +1,6 @@
 package com.example.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -24,7 +25,13 @@ class ProfileActivity : AppCompatActivity() {
             insets
         }
 
-        val userAddress = intent.getStringExtra("USER_ADDRESS") ?: "Lipa, Batangas"
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString("username", "User")
+        val email = sharedPreferences.getString("email", "user@email.com")
+        val userAddress = sharedPreferences.getString("address", "Lipa, Batangas") ?: "Lipa, Batangas"
+
+        findViewById<TextView>(R.id.profile_name).text = username
+        findViewById<TextView>(R.id.profile_email).text = email
 
         findViewById<RelativeLayout>(R.id.your_orders_layout).setOnClickListener {
             startActivity(Intent(this, MyOrdersActivity::class.java))

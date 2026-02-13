@@ -1,5 +1,6 @@
 package com.example.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -29,6 +31,13 @@ class SettingsActivity : AppCompatActivity() {
                 insets
             }
         }
+
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val username = sharedPreferences.getString("username", "Ceile Marie Guce")
+        val address = sharedPreferences.getString("address", "Lipa, Batangas")
+
+        findViewById<TextView>(R.id.tvSettingsName).text = username
+        findViewById<TextView>(R.id.tvSettingsAddress).text = address
 
         findViewById<LinearLayout>(R.id.llProfile).setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)

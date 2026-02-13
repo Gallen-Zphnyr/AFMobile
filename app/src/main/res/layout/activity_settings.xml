@@ -61,6 +61,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvSettingsName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ceile Marie Guce"
@@ -81,6 +82,7 @@
                                 android:contentDescription="Location Icon" />
 
                             <TextView
+                                android:id="@+id/tvSettingsAddress"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="4dp"
