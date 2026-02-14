@@ -250,3 +250,4 @@ exports.onUserDelete = functions.auth.user().onDelete(async (user) => {
     functions.logger.error('Error in onUserDelete cleanup:', error);
   }
 });
+

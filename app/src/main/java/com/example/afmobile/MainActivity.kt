@@ -80,8 +80,8 @@ class MainActivity : AppCompatActivity() {
                 try {
                     auth.signInWithEmailAndPassword(email, password).await()
                     Toast.makeText(this@MainActivity, "Welcome back!", Toast.LENGTH_SHORT).show()
-                    // Navigate to Profile Activity
-                    startActivity(Intent(this@MainActivity, ProfileActivity::class.java))
+                    // Navigate to Home Activity
+                    startActivity(Intent(this@MainActivity, HomeActivity::class.java))
                     finish()
                 } catch (e: Exception) {
                     Toast.makeText(this@MainActivity, "Login failed: ${e.message}", Toast.LENGTH_SHORT).show()
