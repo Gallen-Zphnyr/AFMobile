@@ -1,20 +1,320 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
 
-    <ImageButton
-        android:id="@+id/btnProfile"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Profile"
-        android:scaleType="centerInside"
-        android:src="@drawable/profile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Header Section -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/bg_purple"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="20dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/logoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A&amp;F"
+            android:textColor="@color/white"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/searchBar"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="15dp"
+            android:layout_weight="1"
+            android:background="@drawable/edittext_bg"
+            android:drawableStart="@drawable/ic_search_small"
+            android:drawablePadding="10dp"
+            android:hint=""
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:paddingHorizontal="15dp" />
+
+        <ImageButton
+            android:id="@+id/btnProfile"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/edittext_bg"
+            android:contentDescription="Profile"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/profile" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Hero Banner -->
+            <View
+                android:id="@+id/heroBanner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/white_card_bg"
+                android:backgroundTint="#BDBDBD" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Categories:"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <!-- Categories Horizontal List -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Category Popular -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="15dp">
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/category_bg"
+                            android:padding="12dp"
+                            android:src="@drawable/popular"
+                            android:contentDescription="Popular" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Popular"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <!-- Category Chocolate Bar -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="15dp">
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/category_bg"
+                            android:padding="12dp"
+                            android:src="@drawable/chocolatebar"
+                            android:contentDescription="Chocolate Bar" />
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Chocolate\nBar"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
+                    <!-- Category Truffles -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="15dp">
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/category_bg"
+                            android:padding="12dp"
+                            android:src="@drawable/truffles"
+                            android:contentDescription="Truffles" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Truffles"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <!-- Category Gift Box -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="15dp">
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/category_bg"
+                            android:padding="12dp"
+                            android:src="@drawable/giftbox"
+                            android:contentDescription="Gift Box" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Gift Box"
+                            android:textColor="@color/black"
+                            android:textSize="12sp"
+                            android:gravity="center" />
+                    </LinearLayout>
+
+                    <!-- Category Dark Chocolate -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+                        <ImageView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:background="@drawable/category_bg"
+                            android:padding="12dp"
+                            android:src="@drawable/darkchocolate"
+                            android:contentDescription="Dark Chocolate" />
+                        <TextView
+                            android:layout_width="70dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="Dark\nChocolate"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- Product Grid -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:columnCount="3"
+                android:alignmentMode="alignMargins"
+                android:columnOrderPreserved="false">
+
+                <!-- Item 1: Milk Chocolate -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#E8D9FF">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/milkchocolate"
+                        android:contentDescription="Milk Chocolate" />
+                </androidx.cardview.widget.CardView>
+
+                <!-- Item 2: Dark Chocolate -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#E8D9FF">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/darkchoco"
+                        android:contentDescription="Dark Chocolate" />
+                </androidx.cardview.widget.CardView>
+
+                <!-- Item 3: White Chocolate -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#E8D9FF">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/whitechcoclate"
+                        android:contentDescription="White Chocolate" />
+                </androidx.cardview.widget.CardView>
+
+                <!-- Item 4: Chocolate Truffles -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#E8D9FF">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/chocotruffles"
+                        android:contentDescription="Chocolate Truffles" />
+                </androidx.cardview.widget.CardView>
+
+                <!-- Item 5 -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#E8D9FF" />
+
+                <!-- Item 6 -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="5dp"
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#E8D9FF" />
+
+            </GridLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
