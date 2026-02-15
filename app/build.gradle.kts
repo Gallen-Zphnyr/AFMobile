@@ -16,6 +16,10 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Maps API Key
+        manifestPlaceholders["MAPS_API_KEY"] =
+            project.findProperty("MAPS_API_KEY") as String? ?: ""
     }
 
     buildTypes {
@@ -81,6 +85,15 @@ dependencies {
 
     // SwipeRefreshLayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    // Google Places API for address selection
+    implementation("com.google.android.libraries.places:places:3.3.0")
+
+    // Google Play Services Location
+    implementation("com.google.android.gms:play-services-location:21.1.0")
+
+    // Google Maps SDK
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
 
     // SQLite is built into Android - no extra dependencies needed
 }

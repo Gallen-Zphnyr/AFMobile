@@ -216,11 +216,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun onProductClick(product: Product) {
-        // TODO: Navigate to product detail
-        Toast.makeText(
-            requireContext(),
-            "Clicked: ${product.name} - ₱${product.price}",
-            Toast.LENGTH_SHORT
-        ).show()
+        // Show product detail bottom sheet
+        val bottomSheet = ProductDetailBottomSheet.newInstance(product)
+        bottomSheet.show(parentFragmentManager, "ProductDetailBottomSheet")
     }
 }

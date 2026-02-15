@@ -5,6 +5,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".AFMobileApplication"
@@ -16,6 +18,12 @@
         android:roundIcon="@drawable/my_chocolate_logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.AFMobile">
+
+        <!-- Google Maps API Key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBpNs5g_k_1I1aGCMOjUauo1m_C1oQjMxA" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -31,6 +39,12 @@
         </activity>
         <activity android:name=".SettingsActivity" />
         <activity android:name=".ToPayActivity" />
+        <activity android:name=".CheckoutActivity"
+            android:theme="@style/Theme.AFMobile" />
+        <activity android:name=".PhoneNumberActivity"
+            android:theme="@style/Theme.AFMobile" />
+        <activity android:name=".AddressPickerActivity"
+            android:theme="@style/Theme.AFMobile" />
     </application>
 
 </manifest>

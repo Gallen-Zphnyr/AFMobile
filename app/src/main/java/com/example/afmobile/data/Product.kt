@@ -1,6 +1,7 @@
 package com.example.afmobile.data
 
 import com.google.firebase.Timestamp
+import java.io.Serializable
 
 /**
  * Product data class
@@ -18,20 +19,22 @@ data class Product(
     val salesCount: Int,
     val createdAt: Long,
     val updatedAt: Long
-)
+) : Serializable
 
 /**
  * Firebase Product data class for Firestore parsing
+ * Uses Long for integer fields and Double for decimal fields
+ * to match Firebase Firestore's native types
  */
 data class FirebaseProduct(
     val name: String = "",
     val description: String = "",
-    val price: Number = 0,
+    val price: Double = 0.0,
     val category: String = "",
     val imageUrl: String = "",
     val sku: String = "",
-    val stockLevel: Number = 0,
-    val salesCount: Number = 0,
+    val stockLevel: Long = 0L,
+    val salesCount: Long = 0L,
     val createdAt: Timestamp? = null,
     val updatedAt: Timestamp? = null
 ) {
@@ -40,7 +43,7 @@ data class FirebaseProduct(
             id = id,
             name = name,
             description = description,
-            price = price.toDouble(),
+            price = price,
             category = category,
             imageUrl = imageUrl,
             sku = sku,
