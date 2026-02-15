@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.example.afmobile.data.AppDatabase
 import com.example.afmobile.data.ProductRepository
 
 /**
@@ -21,9 +20,7 @@ class ProductSyncWorker(
         return try {
             Log.d(TAG, "Starting product sync...")
 
-            val database = AppDatabase.getDatabase(applicationContext)
-            val repository = ProductRepository(database.productDao())
-
+            val repository = ProductRepository(applicationContext)
             val success = repository.syncProductsFromFirebase()
 
             if (success) {

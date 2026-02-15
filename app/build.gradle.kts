@@ -81,4 +81,6 @@ dependencies {
 
     // SwipeRefreshLayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+
+    // SQLite is built into Android - no extra dependencies needed
 }

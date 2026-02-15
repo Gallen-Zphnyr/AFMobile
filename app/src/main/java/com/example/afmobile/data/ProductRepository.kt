@@ -1,7 +1,9 @@
 package com.example.afmobile.data
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
@@ -9,26 +11,54 @@ import kotlinx.coroutines.tasks.await
  * Repository for Product data
  * Handles data operations from both local database and Firebase
  */
-class ProductRepository(private val productDao: ProductDao) {
+class ProductRepository(context: Context) {
 
+    private val dbHelper = ProductDatabaseHelper(context)
     private val firestore = FirebaseFirestore.getInstance()
     private val TAG = "ProductRepository"
 
-    // LiveData from local database
-    val allProducts: LiveData<List<Product>> = productDao.getAllProducts()
+    // LiveData for products
+    private val _allProducts = MutableLiveData<List<Product>>()
+    val allProducts: LiveData<List<Product>> = _allProducts
+
+    private val _allCategories = MutableLiveData<List<String>>()
+    val allCategories: LiveData<List<String>> = _allCategories
+
+    init {
+        // Load initial data
+        refreshAllProducts()
+        refreshCategories()
+    }
+
+    /**
+     * Refresh all products from database
+     */
+    fun refreshAllProducts() {
+        _allProducts.postValue(dbHelper.getAllProducts())
+        refreshCategories()
+    }
+
+    /**
+     * Refresh categories
+     */
+    private fun refreshCategories() {
+        _allCategories.postValue(dbHelper.getAllCategories())
+    }
 
     fun getProductsByCategory(category: String): LiveData<List<Product>> {
-        return productDao.getProductsByCategory(category)
+        val liveData = MutableLiveData<List<Product>>()
+        liveData.value = dbHelper.getProductsByCategory(category)
+        return liveData
     }
 
     fun searchProducts(query: String): LiveData<List<Product>> {
-        return productDao.searchProducts(query)
+        val liveData = MutableLiveData<List<Product>>()
+        liveData.value = dbHelper.searchProducts(query)
+        return liveData
     }
 
-    val allCategories: LiveData<List<String>> = productDao.getAllCategories()
-
     suspend fun getProductById(productId: String): Product? {
-        return productDao.getProductById(productId)
+        return dbHelper.getProductById(productId)
     }
 
     /**
@@ -53,7 +83,8 @@ class ProductRepository(private val productDao: ProductDao) {
             }
 
             if (products.isNotEmpty()) {
-                productDao.insertProducts(products)
+                dbHelper.insertProducts(products)
+                refreshAllProducts()
                 Log.d(TAG, "Successfully synced ${products.size} products")
             } else {
                 Log.w(TAG, "No products found in Firebase")
@@ -69,21 +100,23 @@ class ProductRepository(private val productDao: ProductDao) {
     /**
      * Insert a single product (mainly for testing)
      */
-    suspend fun insertProduct(product: Product) {
-        productDao.insertProduct(product)
+    fun insertProduct(product: Product) {
+        dbHelper.insertOrUpdateProduct(product)
+        refreshAllProducts()
     }
 
     /**
      * Get product count in local database
      */
-    suspend fun getProductCount(): Int {
-        return productDao.getProductCount()
+    fun getProductCount(): Int {
+        return dbHelper.getProductCount()
     }
 
     /**
      * Clear all products from local database
      */
-    suspend fun clearAllProducts() {
-        productDao.deleteAllProducts()
+    fun clearAllProducts() {
+        dbHelper.deleteAllProducts()
+        refreshAllProducts()
     }
 }

@@ -1,16 +1,12 @@
 package com.example.afmobile.data
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.firebase.Timestamp
 
 /**
- * Product Entity for Room Database
- * Mirrors the Firebase Firestore product structure
+ * Product data class
+ * Matches the Firebase Firestore product structure
  */
-@Entity(tableName = "products")
 data class Product(
-    @PrimaryKey
     val id: String,
     val name: String,
     val description: String,

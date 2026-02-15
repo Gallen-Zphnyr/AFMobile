@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.afmobile.data.AppDatabase
 import com.example.afmobile.data.Product
 import com.example.afmobile.data.ProductRepository
 import kotlinx.coroutines.launch
@@ -19,8 +18,7 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     val allCategories: LiveData<List<String>>
 
     init {
-        val productDao = AppDatabase.getDatabase(application).productDao()
-        repository = ProductRepository(productDao)
+        repository = ProductRepository(application.applicationContext)
         allProducts = repository.allProducts
         allCategories = repository.allCategories
     }
@@ -51,7 +49,7 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     /**
      * Get product count
      */
-    suspend fun getProductCount(): Int {
+    fun getProductCount(): Int {
         return repository.getProductCount()
     }
 }
