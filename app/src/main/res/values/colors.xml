@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red">#F44336</color>
     <color name="bg_purple">#C59BFA</color>
     <color name="btn_purple">#431E8C</color>
     <color name="hint_color">#CCCCCC</color>
@@ -9,4 +10,14 @@
     <color name="subtext_color">#666666</color>
     <color name="account_border">#B3E5FC</color>
     <color name="other_border">#EEEEEE</color>
+    <color name="primary_color">#431E8C</color>
+    <color name="text_color">#333333</color>
+
+    <!-- Order Status Colors -->
+    <color name="status_pending">#FF9800</color>
+    <color name="status_paid">#2196F3</color>
+    <color name="status_approved">#9C27B0</color>
+    <color name="status_shipped">#FF9800</color>
+    <color name="status_delivered">#4CAF50</color>
+    <color name="status_cancelled">#F44336</color>
 </resources>

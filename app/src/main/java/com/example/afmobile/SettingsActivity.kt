@@ -29,8 +29,7 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         findViewById<LinearLayout>(R.id.llProfile).setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
+            // Handled by navigation component
         }
 
         findViewById<LinearLayout>(R.id.llChangePassword).setOnClickListener {
